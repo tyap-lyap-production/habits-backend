@@ -1,14 +1,15 @@
-from sqlalchemy import Column, UUID, Integer, Float
+from sqlalchemy import Column, UUID, Integer, Float, String
 from sqlalchemy.orm import relationship
 from app.db.base import Base
 import uuid
 
+
 class Goal(Base):
     __tablename__ = "goal"
 
-    goal_id = Column(UUID, primary_key=True, default=uuid.uuid4)
-    unit_type = Column(Integer, nullable=False)
-    value = Column(Float, nullable=False)
+    id = Column(UUID, primary_key=True, default=uuid.uuid4)
+    unit_type = Column(String, nullable=False)
+    value = Column(Integer, nullable=False)
     periodicity = Column(Integer, nullable=False)
 
     # Связь с Habit
