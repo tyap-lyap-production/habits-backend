@@ -95,7 +95,7 @@ def test_create_habit():
         "goal": {
             "value": 10,
             "unitType": "kg",
-            "periodicity": 1
+            "periodicity": "dayli"
         },
         "status": 0
     }
@@ -125,7 +125,7 @@ def test_get_habits():
         "goal": {
             "value": 10,
             "unitType": "kg",
-            "periodicity": 1
+            "periodicity": "dayli"
         },
         "status": 0
     }
@@ -155,7 +155,7 @@ def test_update_habit():
         "goal": {
             "value": 10,
             "unitType": "kg",
-            "periodicity": 1
+            "periodicity": "dayli"
         },
         "status": 0
     }
@@ -172,7 +172,7 @@ def test_update_habit():
         "goal": {
             "value": 15,
             "unitType": "kg",
-            "periodicity": 1
+            "periodicity": "dayli"
         },
         "status": 1
     }
@@ -197,7 +197,7 @@ def test_delete_habit():
         "goal": {
             "value": 10,
             "unitType": "kg",
-            "periodicity": 1
+            "periodicity": "dayli"
         },
         "status": 0
     }
@@ -217,7 +217,7 @@ def test_delete_habit():
         "goal": {
             "value": 10,
             "unitType": "kg",
-            "periodicity": 1
+            "periodicity": "dayli"
         },
         "status": 0
     }

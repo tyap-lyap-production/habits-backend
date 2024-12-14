@@ -10,7 +10,7 @@ class Goal(Base):
     id = Column(UUID, primary_key=True, default=uuid.uuid4)
     unit_type = Column(String, nullable=False)
     value = Column(Integer, nullable=False)
-    periodicity = Column(Integer, nullable=False)
+    periodicity = Column(String, nullable=False)
 
     # Связь с Habit
     habits = relationship("Habit", back_populates="goal", remote_side="Habit.goal_id")

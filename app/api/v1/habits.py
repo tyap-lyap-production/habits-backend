@@ -22,7 +22,7 @@ def create_habit(user_id: UUID, habit: HabitBase, db: Session = Depends(get_db))
     db_goal = GoalModel(
         unit_type=habit.goal.unitType,
         value=habit.goal.value,
-        periodicity=int(habit.goal.periodicity),
+        periodicity=habit.goal.periodicity,
     )
 
     db.add(db_goal)

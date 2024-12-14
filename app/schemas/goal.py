@@ -2,17 +2,15 @@ from pydantic import BaseModel
 from uuid import UUID
 from datetime import date
 from typing import Optional
-from app.schemas.periodicity import HabitPeriodicity
-
 
 class GoalBase(BaseModel):
-    periodicity: HabitPeriodicity
+    periodicity: str
     value: int
     unitType: str
 
 
 class GoalUpdate(BaseModel):
-    periodicity: Optional[HabitPeriodicity] = None
+    periodicity: Optional[str] = None
     value: Optional[int] = None
     unitType: Optional[str] = None
 
