@@ -29,7 +29,7 @@ def create_habit(user_id: UUID, habit: HabitBase, db: Session = Depends(get_db))
     db.commit()
     db.refresh(db_goal)
 
-    is_user = db.query(UserModel).filter(UserModel.id == user_id).first()
+    is_user = db.query(UserModel).filter(UserModel.user_id == user_id).first()
     if not is_user:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, detail="User not found"
@@ -52,10 +52,11 @@ def create_habit(user_id: UUID, habit: HabitBase, db: Session = Depends(get_db))
 
 @router.get("/")
 def get_habits(user_id: UUID, db: Session = Depends(get_db)):
-    is_user = db.query(HabitModel).filter(HabitModel.user_id == user_id).first()
+    is_user = db.query(UserModel).filter(UserModel.user_id == user_id).first()
+    print(is_user)
     if not is_user:
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND, detail="Habit not found"
+            status_code=status.HTTP_404_NOT_FOUND, detail="User not found"
         )
 
     habits = (
@@ -64,11 +65,13 @@ def get_habits(user_id: UUID, db: Session = Depends(get_db)):
         .filter(HabitModel.user_id == user_id)
         .all()
     )
+    print("habits", habits)
 
     # Convert to a serializable format
     results = [
         {"habit": habit.__dict__, "goal": goal.__dict__} for habit, goal in habits
     ]
+    print("results", results)
 
     # Remove SQLAlchemy instance state keys (e.g., '_sa_instance_state')
     for result in results:

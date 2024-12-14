@@ -1,0 +1,489 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+      "title": "Habits backend",
+      "version": "0.1.0"
+    },
+    "paths": {
+      "/habits/": {
+        "post": {
+          "tags": [
+            "habits"
+          ],
+          "summary": "Create Habit",
+          "operationId": "create_habit_habits__post",
+          "parameters": [
+            {
+              "name": "user_id",
+              "in": "query",
+              "required": true,
+              "schema": {
+                "type": "string",
+                "format": "uuid",
+                "title": "User Id"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HabitBase"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {
+  
+                  }
+                }
+              }
+            },
+            "422": {
+              "description": "Validation Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/HTTPValidationError"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "get": {
+          "tags": [
+            "habits"
+          ],
+          "summary": "Get Habits",
+          "operationId": "get_habits_habits__get",
+          "parameters": [
+            {
+              "name": "user_id",
+              "in": "query",
+              "required": true,
+              "schema": {
+                "type": "string",
+                "format": "uuid",
+                "title": "User Id"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {
+  
+                  }
+                }
+              }
+            },
+            "422": {
+              "description": "Validation Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/HTTPValidationError"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/habits/{habit_id}": {
+        "put": {
+          "tags": [
+            "habits"
+          ],
+          "summary": "Update Habit",
+          "operationId": "update_habit_habits__habit_id__put",
+          "parameters": [
+            {
+              "name": "habit_id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string",
+                "format": "uuid",
+                "title": "Habit Id"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HabitUpdate"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {
+  
+                  }
+                }
+              }
+            },
+            "422": {
+              "description": "Validation Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/HTTPValidationError"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "delete": {
+          "tags": [
+            "habits"
+          ],
+          "summary": "Delete Habit",
+          "operationId": "delete_habit_habits__habit_id__delete",
+          "parameters": [
+            {
+              "name": "habit_id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string",
+                "format": "uuid",
+                "title": "Habit Id"
+              }
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "Successful Response"
+            },
+            "422": {
+              "description": "Validation Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/HTTPValidationError"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/user/": {
+        "post": {
+          "tags": [
+            "user"
+          ],
+          "summary": "Create User",
+          "operationId": "create_user_user__post",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserCreate"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "201": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {
+  
+                  }
+                }
+              }
+            },
+            "422": {
+              "description": "Validation Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/HTTPValidationError"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/user/login": {
+        "post": {
+          "tags": [
+            "user"
+          ],
+          "summary": "Create User",
+          "operationId": "create_user_user_login_post",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserCreate"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "201": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {
+  
+                  }
+                }
+              }
+            },
+            "422": {
+              "description": "Validation Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/HTTPValidationError"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "GoalBase": {
+          "properties": {
+            "periodicity": {
+              "$ref": "#/components/schemas/HabitPeriodicity"
+            },
+            "value": {
+              "type": "integer",
+              "title": "Value"
+            },
+            "unitType": {
+              "type": "string",
+              "title": "Unittype"
+            }
+          },
+          "type": "object",
+          "required": [
+            "periodicity",
+            "value",
+            "unitType"
+          ],
+          "title": "GoalBase"
+        },
+        "GoalUpdate": {
+          "properties": {
+            "periodicity": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/HabitPeriodicity"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "value": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Value"
+            },
+            "priorunitTypeity": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Priorunittypeity"
+            }
+          },
+          "type": "object",
+          "title": "GoalUpdate"
+        },
+        "HTTPValidationError": {
+          "properties": {
+            "detail": {
+              "items": {
+                "$ref": "#/components/schemas/ValidationError"
+              },
+              "type": "array",
+              "title": "Detail"
+            }
+          },
+          "type": "object",
+          "title": "HTTPValidationError"
+        },
+        "HabitBase": {
+          "properties": {
+            "name": {
+              "type": "string",
+              "title": "Name"
+            },
+            "createDate": {
+              "type": "string",
+              "format": "date",
+              "title": "Createdate"
+            },
+            "goal": {
+              "$ref": "#/components/schemas/GoalBase"
+            },
+            "status": {
+              "$ref": "#/components/schemas/HabitStatus"
+            }
+          },
+          "type": "object",
+          "required": [
+            "name",
+            "createDate",
+            "goal",
+            "status"
+          ],
+          "title": "HabitBase"
+        },
+        "HabitPeriodicity": {
+          "type": "integer",
+          "enum": [0, 1, 2],
+          "title": "HabitPeriodicity"
+        },
+        "HabitStatus": {
+          "type": "integer",
+          "enum": [0, 1],
+          "title": "HabitStatus"
+        },
+        "HabitUpdate": {
+          "properties": {
+            "name": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Name"
+            },
+            "createDate": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Createdate"
+            },
+            "goal": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/GoalUpdate"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "status": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/HabitStatus"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "type": "object",
+          "required": [
+            "status"
+          ],
+          "title": "HabitUpdate"
+        },
+        "UserCreate": {
+          "properties": {
+            "email": {
+              "type": "string",
+              "title": "Email"
+            },
+            "password": {
+              "type": "string",
+              "title": "Password"
+            }
+          },
+          "type": "object",
+          "required": [
+            "email",
+            "password"
+          ],
+          "title": "UserCreate"
+        },
+        "ValidationError": {
+          "properties": {
+            "loc": {
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "integer"
+                  }
+                ]
+              },
+              "type": "array",
+              "title": "Location"
+            },
+            "msg": {
+              "type": "string",
+              "title": "Message"
+            },
+            "type": {
+              "type": "string",
+              "title": "Error Type"
+            }
+          },
+          "type": "object",
+          "required": [
+            "loc",
+            "msg",
+            "type"
+          ],
+          "title": "ValidationError"
+        }
+      }
+    }
+  }

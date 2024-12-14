@@ -14,7 +14,7 @@ class GoalBase(BaseModel):
 class GoalUpdate(BaseModel):
     periodicity: Optional[HabitPeriodicity] = None
     value: Optional[int] = None
-    priorunitTypeity: Optional[str] = None
+    unitType: Optional[str] = None
 
 
 class Goal(GoalBase):
